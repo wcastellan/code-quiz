@@ -8,9 +8,61 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    
+    <div class="wrapper">
+
+        <!-- highscore and timer -->
+        <header class="header">
+
+            <!-- highscore section -->
+            <div class="score">
+                <a href="#" id="highscore">View High Score</a>
+            </div>
+
+            <!-- timer section -->
+            <div class="time" id="timer">
+                <div class="clock"></div> Time: <span id="timeLeft">0</span>
+            </div>
+
+            <div id="timesUp" class="time">Time's Up!</div>
+
+        </header>
+
+
+        <section id="mainBody" class="body">
+            <main class="main">
+
+                <!-- start screen -->
+                <div id="start">
+                    <h1>Coding Quiz Challenge</h1>
+                    <p>Let's test your knowledge of JavaScript fundementals! Try to answer the following code-related questions within
+                        the time limit.  Keep in mind taht incorrect answers will penalize your time by 10 seconds!
+                    </p>
+                    <button type="button" id="startQuiz">Start Quiz</button>
+                </div>
+
+                <!-- quiz section -->
+                <div id="questions">
+                    <p id="questionTitle"></p>
+                    <div>
+                        <p><button id="btn0" class="btn"></button></p>
+                        <p><button id="btn1" class="btn"></button></p>
+                        <p><button id="btn2" class="btn"></button></p>
+                        <p><button id="btn3" class="btn"></button></p>
+
+                        <hr id="linebreak">
+
+                        <p id="answerCheck"></p>
+                    </div>
+                </div>
+
+                <!-- high score section -->
+                
+            </main>
+        </section>
+    </div>
     
 
     <script src="./assets/javascript/script.js"></script>
 </body>
 </html>
+

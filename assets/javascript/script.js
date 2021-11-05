@@ -151,3 +151,44 @@ function gameOver() {
     finalScore.textContent = correctAnswer;
 }
 
+// enter initials and final score
+function storeHighScore(event) {
+    event.preventDefault();
+
+    if(initialInput.value === "") {
+        alert("Please enter your initials!");
+        return;
+    }
+
+    startDiv.style.display = "none";
+    timer.style.display = "none";
+    timesUp.style.display = "none";
+    summary.style.display = "none";
+    highScoreSection.style.display = "block";
+
+    // store score in local storage
+    var savedHighScores = localStorage.getItem("high scores");
+    var scoresArray;
+
+    if (savedHighScores === null) {
+        scoresArray = [];
+    } else {
+        scoresArray = JSON.parse(savedHighScores)
+    }
+
+    var userScore = {
+        initials: initialInput.value,
+        score: finalScore.textContent
+    };
+
+    console.log(userScore);
+    scoresArray.push(userScore);
+
+    var scoresArrayString = JSON.stringify(scoresArray);
+    window.localStorage.setItem("high scores", scoresArrayString);
+
+    showHighScores();
+}
+
+// function to show high scores
+

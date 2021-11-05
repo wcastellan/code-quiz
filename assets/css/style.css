@@ -20,7 +20,7 @@ a:hover {
 .btn:focus, .btn:active, .btn:visited {
     outline: none !important;
     box-shadow: none !important;
-    background-color: green;
+    background-color: teal;
 }
 
 #finalScore {

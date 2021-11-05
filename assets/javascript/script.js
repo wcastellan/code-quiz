@@ -35,7 +35,7 @@ var timeLeft = document.getElementById("timeLeft");
 var timesUp = document.getElementById("timesUp");
 
 var startDiv = document.getElementById("start");
-var startQuz = document.getElementById("startQuiz");
+var startQuiz = document.getElementById("startQuiz");
 
 var questionDiv = document.getElementById("questionDiv");
 var questionTitle = document.getElementById("questionTitle");
@@ -44,7 +44,7 @@ var choice1 = document.getElementById("button1");
 var choice2 = document.getElementById("button2");
 var choice3 = document.getElementById("button3");
 var choice4 = document.getElementById("button4");
-var answer = document.getElementById("answer");
+var answerCheck = document.getElementById("answerCheck");
 
 var summary = document.getElementById("summary");
 var submitInitials = document.getElementById("submitInitials");
@@ -57,7 +57,7 @@ var finalScore = document.getElementById("finalScore");
 var backBtn = document.getElementById("backBtn");
 var clearBtn = document.getElementById("clearBtn");
 var viewHighScore = document.getElementById("viewHighScore");
-var listOfHighScore = document.getElementById("listOfHighScore");
+var listOfHighScores = document.getElementById("listOfHighScores");
 
 var correctAnswer = 0;
 var questionNumber = 0;
@@ -66,14 +66,14 @@ var questionIndex = 0;
 
 // when I click the start quiz button, the timer starts
 
-var totalTime = 150;
+var totalTime = 151;
 
 function newQuiz() {
 
     questionIndex = 0;
     totalTime = 150;
     timeLeft.textContent = totalTime;
-    initalInput.textContent = "";
+    initials.textContent = "";
 
     startDiv.style.display = "none";
     questionDiv.style.display = "block";
@@ -94,12 +94,13 @@ function newQuiz() {
 };
 
 // show the quiz questions
+
 function showQuiz() {
     nextQuestion();
 }
 
 function nextQuestion() {
-    questionTitle.textContent = question[questionIndex].question;
+    questionTitle.textContent = questions[questionIndex].question;
     choice1.textContent = questions[questionIndex].choices[0]
     choice2.textContent = questions[questionIndex].choices[1]
     choice3.textContent = questions[questionIndex].choices[2]
@@ -152,10 +153,10 @@ function gameOver() {
 }
 
 // enter initials and final score
-function storeHighScore(event) {
+function storeHighScores(event) {
     event.preventDefault();
 
-    if(initialInput.value === "") {
+    if(initials.value === "") {
         alert("Please enter your initials!");
         return;
     }
@@ -177,7 +178,7 @@ function storeHighScore(event) {
     }
 
     var userScore = {
-        initials: initialInput.value,
+        initials: initials.value,
         score: finalScore.textContent
     };
 
@@ -192,3 +193,52 @@ function storeHighScore(event) {
 
 // function to show high scores
 
+var i = 0;
+function showHighScores() {
+
+    startDiv.style.display = "none";
+    timer.style.display = "none";
+    questionDiv.style.display = "none";
+    timesUp.style.display = "none";
+    summary.style.display = "none";
+    highScoreSection.style.display = "block";
+
+    var savedHighScores = localStorage.getItem("high scores");
+
+    if (savedHighScores === null) {
+        return;
+    }
+
+    console.log(savedHighScores);
+
+    var storedHighScores = JSON.parse(savedHighScores);
+
+    for (; i < storedHighScores.length; i++) {
+        var eachNewHighScore = document.createElement("p");
+        eachNewHighScore.innerHTML = storedHighScores[i].initials + ": " + storedHighScores[i].score;
+        listOfHighScores.appendChild(eachNewHighScore);
+    }
+}
+
+// event listeners
+
+startQuiz.addEventListener("click", newQuiz);
+choice1.addEventListener("click", choose1);
+choice2.addEventListener("click", choose2);
+choice3.addEventListener("click", choose3);
+choice4.addEventListener("click", choose4);
+
+submitInitials.addEventListener("click", function(event) {
+    storeHighScores(event);
+});
+
+viewHighScore.addEventListener("click", function() {
+    startDiv.style.display = "block";
+    highScoreSection.style.display = "none";
+});
+
+clearBtn.addEventListener("click", function() {
+    window.localStorage.removeItem("high scores");
+    listOfHighScores.innerHTML = "High Scores Cleared!";
+    listOfHighScores.setAttribute("style", "font-family: sans-serif; font-style: italic")
+});

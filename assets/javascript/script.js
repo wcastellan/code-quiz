@@ -47,7 +47,7 @@ var choice4 = document.getElementById("button4");
 var answerCheck = document.getElementById("answerCheck");
 
 var summary = document.getElementById("summary");
-var submitInitials = document.getElementById("submitInitials");
+var submitInitialsBtn = document.getElementById("submitInitialsBtn");
 var initials = document.getElementById("initials");
 var mainPage = document.getElementById("mainPage");
 
@@ -125,6 +125,7 @@ function checkAnswer(answer) {
         answerCheck.textContent = "Wrong! The correct answer is " + questions[questionIndex].answer;
     }
 
+    questionIndex++;
     // cycle through the other questions until game over
 
     if (questionIndex < questions.length) {
@@ -228,14 +229,19 @@ choice2.addEventListener("click", choose2);
 choice3.addEventListener("click", choose3);
 choice4.addEventListener("click", choose4);
 
-submitInitials.addEventListener("click", function(event) {
+submitInitialsBtn.addEventListener("click", function(event) {
     storeHighScores(event);
 });
 
 viewHighScore.addEventListener("click", function() {
+    startDiv.style.display = "none";
+    highScoreSection.style.display = "block";
+});
+
+backBtn.addEventListener("click", function() {
     startDiv.style.display = "block";
     highScoreSection.style.display = "none";
-});
+})
 
 clearBtn.addEventListener("click", function() {
     window.localStorage.removeItem("high scores");

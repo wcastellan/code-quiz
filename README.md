@@ -17,7 +17,7 @@ allows two applications to talk to eachother; I.E: API.
 https://wcastellan.github.io/code-quiz/
 
 ## Picture
-![Alt text]()
+![Alt text](https://github.com/wcastellan/code-quiz/blob/main/images/Capture.PNG)
 
 ## Contribution
 Wyatt C.
